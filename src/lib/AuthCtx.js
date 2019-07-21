@@ -18,6 +18,8 @@ export const withAuth = Comp => {
             return (
               <Comp
                 login={auth.login}
+                signup={auth.signup}
+                logout={auth.logout}
                 user={auth.user}
                 isLoggedin={auth.isLoggedin}
                 {...this.props}
@@ -64,6 +66,28 @@ class AuthProvider extends Component {
       throw new Error(error)
     }
   };
+  signup = async ({ username, password }) => {
+    try {
+      const user = await auth.signup({ username, password })
+      this.setState({
+        isLoggedin: true,
+        user
+      });
+    } catch (error) {
+      throw new Error(error)
+    }
+  };
+  logout = async () => {
+    try {
+      const user = await auth.logout();
+      this.setState({
+        isLoggedin: false,
+        user: null
+      });
+    } catch (error) {
+      throw new Error(error)
+    }
+  };
 
   render() {
     const { isLoading, isLoggedin, user } = this.state;
@@ -71,6 +95,8 @@ class AuthProvider extends Component {
       <Provider
         value={{
           login: this.login,
+          signin: this.signin,
+          logout: this.logout,
           user,
           isLoggedin,
         }}
