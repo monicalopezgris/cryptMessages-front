@@ -6,6 +6,7 @@
 .pnp.js
 .eslintrc.json
 .gitignore
+.env
 
 # testing
 /coverage
