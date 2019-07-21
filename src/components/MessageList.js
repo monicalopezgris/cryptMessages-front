@@ -2,35 +2,43 @@
 /* eslint-disable react/react-in-jsx-scope */
 import React from 'react';
 import message from '../lib/MessagesServ';
+import ErrorBoundary from '../lib/HOC/ErrorBoundary';
+import Loading from './Loading';
 
 class MessageList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       messages: [],
+      isLoading: true,
     };
   }
 
   async componentWillMount() {
-    const messages = await message.list();
-    this.setState({
-      messages,
-    });
+    try {
+      const messages = await message.list();
+      this.setState({
+        messages,
+        isLoading: false,
+      });
+    } catch (error) {
+      // throw new Error(error);
+    }
   }
 
   render() {
-    const { messages } = this.state;
-    return (
+    const { messages, isLoading } = this.state;
+    return isLoading ? <Loading /> : (
       <>
         <div>Messages </div>
         {
           messages.map((item, i) => (
-            <div key={i}>{item}</div>
+            <div className="message" key={i}>{item}</div>
           ))
         }
       </>
-    );
+    )
   }
 }
 
-export default MessageList;
+export default ErrorBoundary(MessageList);

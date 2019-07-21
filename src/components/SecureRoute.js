@@ -5,6 +5,7 @@ import { Route, Redirect } from 'react-router-dom';
 import { withAuth } from '../lib/AuthCtx';
 
 function SecureRoute({ component: Component, isLoggedin }) {
+
   return (
     <Route
       render={props => (isLoggedin ? <Component {...props} /> : <Redirect to="/login" />)
