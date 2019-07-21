@@ -40,18 +40,20 @@ class AuthProvider extends Component {
   };
 
   async componentDidMount() {
-    const user = auth.me();
     try {
+      console.log('me')
+      const user = await auth.me();
+      console.log(this.state)
       this.setState({
         isLoading: false,
         isLoggedin: true,
         user,
       });
+      console.log(this.state)
     } catch (error) {
       this.setState({
         isLoading: false,
       });
-      throw new Error(error)
     }
   }
 
