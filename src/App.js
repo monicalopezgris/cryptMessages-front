@@ -14,8 +14,8 @@ function App() {
       </div>
       <Router>
         <Switch>
-          <Route exact path="/" component={Login} />
-          <SecureRoute path="/message" component={MessageList} />
+          <Route exact path="/login" component={Login} />
+          <SecureRoute path="/" component={MessageList} />
         </Switch>
       </Router>
     </AuthContext>
