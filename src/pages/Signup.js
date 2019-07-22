@@ -31,7 +31,7 @@ class Signup extends Component {
       } else {
         const { history } = this.props;
         const user = await auth.signup(this.state);
-        history.push(`/`);
+        history.go(`/`);
       }
     } catch (error) {
       throw new Error(error);

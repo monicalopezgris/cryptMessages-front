@@ -47,7 +47,6 @@ class AuthProvider extends Component {
         isLoggedin: true,
         user,
       });
-      console.log(this.state)
     } catch (error) {
       this.setState({
         isLoading: false,

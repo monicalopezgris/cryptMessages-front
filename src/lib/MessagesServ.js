@@ -3,7 +3,7 @@ import axios from 'axios';
 class MessagesService {
   constructor() {
     this.messages = axios.create({
-      baseURL: 'http://localhost:5000/api/',
+      baseURL: process.env.REACT_APP_APIURL,
       withCredentials: true,
     });
   }
