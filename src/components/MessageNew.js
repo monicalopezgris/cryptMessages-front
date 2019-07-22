@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
+import message from '../lib/MessagesServ';
 
 class MessageNew extends Component {
   state = {
-    message: '',
+    messageText: '',
   }
 
   handleInputChange = (event) => {
@@ -16,21 +17,27 @@ class MessageNew extends Component {
   handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const message = await message.new(this.state);
+      const { messageText } = this.state;
+      const { getList } = this.props;
+      const result = await message.add(messageText);
+      getList()
     } catch (error) {
       throw new Error(error);
     }
   }
+
   render() {
     return (
       <form onSubmit={this.handleSubmit}>
         <input
-          name="username"
+          name="messageText"
           type="text"
           placeholder="New message"
-          value={this.state.username}
+          value={this.state.message}
           onChange={this.handleInputChange} />
-        <button type='submit'>Submit</button>
+        <button
+          type='submit'
+        >Submit</button>
       </form>
     );
   }

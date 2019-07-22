@@ -23,7 +23,7 @@ class Header extends Component {
   render() {
     const { isLogedIn } = this.props
 
-    return isLogedIn ?
+    return !isLogedIn ?
       <div className="header">
         <h1>CryptoCesar</h1>
         <button
@@ -41,14 +41,22 @@ class Header extends Component {
             type="button"
             name="login"
             onClick={this.handleClick}>
-            <Link to="/login">Login</Link>
+            <Link
+              className="link"
+              to="/login">
+              Login
+            </Link>
           </button>
           <button
             className="button"
             type="button"
             name="signup"
             onClick={this.handleClick}>
-            <Link to="/signup">Signup</Link>
+            <Link
+              className="link"
+              to="/signup">
+              Signup
+            </Link>
           </button>
         </div>
       )

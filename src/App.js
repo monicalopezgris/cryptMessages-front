@@ -3,21 +3,21 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import AuthContext from './lib/AuthCtx';
 import SecureRoute from './components/SecureRoute';
-import MessageList from './components/MessageList';
+import AnonRoute from './components/AnonRoute';
+import MessageBoard from './pages/MessageBoard';
+import Header from './components/Header';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 
 function App() {
   return (
     <AuthContext>
-      <div>
-        Header
-      </div>
       <Router>
+        <Header />
         <Switch>
-          <Route exact path="/login" component={Login} />
-          <Route exact path="/signup" component={Signup} />
-          <SecureRoute path="/" component={MessageList} />
+          <AnonRoute exact path="/login" component={Login} />
+          <SecureRoute exact path="/" component={MessageBoard} />
+          <AnonRoute path="/signup" component={Signup} />
         </Switch>
       </Router>
     </AuthContext>

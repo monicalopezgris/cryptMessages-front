@@ -21,7 +21,8 @@ class Login extends Component {
     try {
       const { history } = this.props;
       const user = await auth.login(this.state);
-      history.push(`/message`);
+      console.log(history)
+      history.go(`/`);
     } catch (error) {
       throw new Error(error);
     }
