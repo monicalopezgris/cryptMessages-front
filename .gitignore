@@ -8,6 +8,8 @@
 .gitignore
 .env.production
 .env.development
+.firebase
+.firebaserc
 # testing
 /coverage
 
