@@ -1,6 +1,6 @@
 /* eslint-disable react/jsx-filename-extension */
 import React from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Switch } from 'react-router-dom';
 import AuthContext from './lib/AuthCtx';
 import SecureRoute from './components/SecureRoute';
 import AnonRoute from './components/AnonRoute';

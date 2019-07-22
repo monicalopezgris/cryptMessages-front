@@ -4,6 +4,7 @@ import message from '../lib/MessagesServ';
 class MessageNew extends Component {
   state = {
     messageText: '',
+    error: false,
   }
 
   handleInputChange = (event) => {
@@ -18,15 +19,25 @@ class MessageNew extends Component {
     event.preventDefault();
     try {
       const { messageText } = this.state;
-      const { getList } = this.props;
-      const result = await message.add(messageText);
-      getList()
+      if (
+        messageText.length <= 0 ||
+        messageText === null
+      ) {
+        this.setState({
+          error: 'Text is required'
+        })
+      } else {
+        const { getList } = this.props;
+        const result = await message.add(messageText);
+        getList()
+      }
     } catch (error) {
       throw new Error(error);
     }
   }
 
   render() {
+    const { error } = this.state;
     return (
       <form onSubmit={this.handleSubmit}>
         <input
@@ -35,6 +46,7 @@ class MessageNew extends Component {
           placeholder="New message"
           value={this.state.message}
           onChange={this.handleInputChange} />
+        {error ? <div>{error}</div> : <span />}
         <button
           type='submit'
         >Submit</button>

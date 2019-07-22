@@ -21,9 +21,8 @@ class Header extends Component {
   }
 
   render() {
-    const { isLogedIn } = this.props
-
-    return !isLogedIn ?
+    const { isLoggedin } = this.props
+    return isLoggedin ?
       <div className="header">
         <h1>CryptoCesar</h1>
         <button

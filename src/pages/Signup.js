@@ -5,7 +5,8 @@ import ErrorBoundary from '../lib/HOC/ErrorBoundary'
 class Signup extends Component {
   state = {
     username: '',
-    password: ''
+    password: '',
+    error: false,
   }
 
   handleInputChange = (event) => {
@@ -19,15 +20,26 @@ class Signup extends Component {
   handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const { history } = this.props;
-      const user = await auth.signup(this.state);
-      history.push(`/message`);
+      const { username, password } = this.state;
+      if (
+        username.length <= 2 ||
+        password.length <= 2
+      ) {
+        this.setState({
+          error: 'Username and password are required and must be larger than 3 digits'
+        })
+      } else {
+        const { history } = this.props;
+        const user = await auth.signup(this.state);
+        history.push(`/`);
+      }
     } catch (error) {
       throw new Error(error);
     }
   }
 
   render() {
+    const { error } = this.state;
     return (
       <>
         <h2>Signup</h2>
@@ -49,6 +61,7 @@ class Signup extends Component {
               value={this.state.password}
               onChange={this.handleInputChange} />
           </label>
+          {error ? <div>{error}</div> : <span />}
           <button type='submit'>Submit</button>
         </form>
       </>
