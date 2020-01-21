@@ -16,7 +16,6 @@ class Header extends Component {
     const { target, target: { name } } = event;
     const { history } = this.props;
     if (name === 'login') {
-
     }
   }
 
