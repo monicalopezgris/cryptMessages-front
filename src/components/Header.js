@@ -2,6 +2,27 @@
 import React, { Component } from 'react';
 import { withAuth } from '../lib/AuthCtx';
 import { Link } from 'react-router-dom';
+import styled from 'styled-components';
+
+const Button = styled.h1`
+  padding:0.5rem 1rem;
+  border-radius: 10%;
+  border:1px solid white;
+  background-color: lightcoral;
+  font-size: 0.9rem;
+  color:black;
+`;
+
+const StyledLink = styled(Link)`
+  text-decoration: none;
+  font-size: 0.9rem;
+  color:black;
+`;
+
+const Img = styled.img`
+  margin-top: 3rem;
+  width:100%;
+`;
 
 class Header extends Component {
   handleLogout = async () => {
@@ -10,13 +31,6 @@ class Header extends Component {
       logout();
     } catch (error) {
       throw new Error(error);
-    }
-  }
-  handleClick = async (event) => {
-    const { target, target: { name } } = event;
-    const { history } = this.props;
-    if (name === 'login') {
-
     }
   }
 
@@ -34,29 +48,25 @@ class Header extends Component {
       </div>
       : (
         <div className="header">
-          <h1>CryptoCesar</h1>
-          <button
-            className="button"
+          <Img src={window.location.origin + '/logoCrypto.png'} alt="Logo" />
+          {/* <Button
             type="button"
             name="login"
             onClick={this.handleClick}>
-            <Link
-              className="link"
+            <StyledLink
               to="/login">
               Login
-            </Link>
-          </button>
-          <button
-            className="button"
+            </StyledLink>
+          </Button>
+          <Button
             type="button"
             name="signup"
             onClick={this.handleClick}>
-            <Link
-              className="link"
+            <StyledLink
               to="/signup">
               Signup
-            </Link>
-          </button>
+            </StyledLink>
+          </Button> */}
         </div>
       )
   }
