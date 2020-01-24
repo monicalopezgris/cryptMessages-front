@@ -1,12 +1,60 @@
 import React, { Component } from 'react';
-import auth from '../lib/AuthServ'
-import ErrorBoundary from '../lib/HOC/ErrorBoundary'
+import auth from '../lib/AuthServ';
+import ErrorBoundary from '../lib/HOC/ErrorBoundary';
+import Loading from '../components/Loading';
+import { Link } from 'react-router-dom';
+import styled from 'styled-components';
+
+const Form = styled.form`
+  margin-top: 5rem;
+  display:flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+`;
+
+const Input = styled.input`
+  border-radius: 20px;
+  border:1px solid white;
+  color:black;
+  margin: 0.5rem auto;
+  padding: 0.5rem 1rem;
+`;
+
+const Button = styled.button`
+  background-color: transparent;
+  border-radius: 20px;
+  border:3px solid #f6ff88;
+  color:#f6ff88;
+  font-weight: bold;
+  padding: 0.5rem 1rem;
+  margin: 1rem auto;
+  &:hover {
+    background-color: #f6ff88;
+    color: #096c77;
+  }
+`;
+
+const StyledLink = styled(Link)`
+  // text-decoration: none;
+  font-size: 0.9rem;
+  color:#f6ff88;
+  padding: 0.5rem 1rem;
+  margin: 1rem auto;
+`;
 
 class Login extends Component {
   state = {
     username: '',
     password: '',
-    error: false
+    error: false,
+    isLoading: true
+  }
+
+  componentDidMount() {
+    this.setState({
+      isLoading: false,
+    })
   }
 
   handleInputChange = (event) => {
@@ -15,7 +63,7 @@ class Login extends Component {
     this.setState({
       [name]: value
     });
-  }
+  };
 
   handleSubmit = async (event) => {
     event.preventDefault();
@@ -39,31 +87,28 @@ class Login extends Component {
   }
 
   render() {
-    const { error } = this.state;
-    return (
+    const { error, location, isLoading } = this.state;
+    return isLoading ? <Loading /> : (
       <>
-        <h2>Login</h2>
-        <form onSubmit={this.handleSubmit}>
-          <label>
-            Username:
-        <input
-              name="username"
-              type="text"
-              value={this.state.username}
-              onChange={this.handleInputChange} />
-          </label>
-          <br />
-          <label>
-            Password:
-        <input
-              name="password"
-              type="password"
-              value={this.state.password}
-              onChange={this.handleInputChange} />
-          </label>
+        <Form onSubmit={this.handleSubmit}>
+          <Input
+            name="username"
+            type="text"
+            placeholder={'username'}
+            value={this.state.username}
+            onChange={this.handleInputChange} />
+          <Input
+            name="password"
+            type="password"
+            placeholder={'password'}
+            value={this.state.password}
+            onChange={this.handleInputChange} />
           {error ? <div>{error}</div> : <span />}
-          <button type='submit'>Submit</button>
-        </form>
+          <Button type='submit'>Submit</Button>
+          <StyledLink to="/signup">
+            You don't have account? Signup
+          </StyledLink>
+        </Form>
       </>
     );
   }

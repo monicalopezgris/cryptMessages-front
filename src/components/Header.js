@@ -2,6 +2,35 @@
 import React, { Component } from 'react';
 import { withAuth } from '../lib/AuthCtx';
 import { Link } from 'react-router-dom';
+import styled from 'styled-components';
+
+const Button = styled.button`
+  background-color: transparent;
+  border-radius: 20px;
+  border:3px solid #f6ff88;
+  color:#f6ff88;
+  font-weight: bold;
+  padding: 0.5rem 1rem;
+  margin: 1rem auto;
+  &:hover {
+    background-color: #f6ff88;
+    color: #096c77;
+  }
+`;
+const Wrapper = styled.div`
+  display:flex;
+  flex-direction:row;
+  height:15%;
+`;
+
+const Img = styled.img`
+  margin-top: 3rem;
+  width:100%;
+`;
+
+const ImgSmall = styled.img`
+  width:60%;
+`;
 
 class Header extends Component {
   handleLogout = async () => {
@@ -12,51 +41,22 @@ class Header extends Component {
       throw new Error(error);
     }
   }
-  handleClick = async (event) => {
-    const { target, target: { name } } = event;
-    const { history } = this.props;
-    if (name === 'login') {
-    }
-  }
 
   render() {
     const { isLoggedin } = this.props
     return isLoggedin ?
-      <div className="header">
-        <h1>CryptoCesar</h1>
-        <button
-          className="button"
+      <Wrapper>
+        <ImgSmall src={window.location.origin + '/logoCrypto.png'} alt="Logo" />
+        <Button
           type="button"
           onClick={this.handleLogout}>
           Logout
-        </button>
-      </div>
+        </Button>
+      </Wrapper>
       : (
-        <div className="header">
-          <h1>CryptoCesar</h1>
-          <button
-            className="button"
-            type="button"
-            name="login"
-            onClick={this.handleClick}>
-            <Link
-              className="link"
-              to="/login">
-              Login
-            </Link>
-          </button>
-          <button
-            className="button"
-            type="button"
-            name="signup"
-            onClick={this.handleClick}>
-            <Link
-              className="link"
-              to="/signup">
-              Signup
-            </Link>
-          </button>
-        </div>
+        <>
+          <Img src={window.location.origin + '/logoCrypto.png'} alt="Logo" />
+        </>
       )
   }
 }
