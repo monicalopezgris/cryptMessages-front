@@ -14,6 +14,12 @@ class MessagesService {
       .then(({ data }) => data);
   };
 
+  listEncrypted = () => {
+    return this.messages
+      .get('/message/encrypted')
+      .then(({ data }) => data);
+  };
+
   add = (data) => {
     return this.messages
       .post('/message', { data })
