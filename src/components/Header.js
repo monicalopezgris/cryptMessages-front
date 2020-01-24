@@ -17,7 +17,6 @@ const Button = styled.button`
     color: #096c77;
   }
 `;
-
 const Wrapper = styled.div`
   display:flex;
   flex-direction:row;
@@ -55,9 +54,9 @@ class Header extends Component {
         </Button>
       </Wrapper>
       : (
-        <Wrapper>
+        <>
           <Img src={window.location.origin + '/logoCrypto.png'} alt="Logo" />
-        </Wrapper>
+        </>
       )
   }
 }

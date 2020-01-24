@@ -12,6 +12,11 @@ const Wrapper = styled.div`
   flex-direction: column;
 `;
 
+const ButtonWrapper = styled.div`
+  display:flex;
+  flex-direction: row;
+`;
+
 const Button = styled.button`
   background-color: transparent;
   border-radius: 20px;
@@ -59,7 +64,10 @@ class MessageBoard extends Component {
   render() {
     return (
       <Wrapper>
-        <Button onClick={this.getList}>Decrypt</Button>
+        <ButtonWrapper>
+          <Button onClick={this.getListEncrypted}>Encrypt</Button>
+          <Button onClick={this.getList}>Decrypt</Button>
+        </ButtonWrapper>
         <MessageList state={this.state} />
         <MessageNew getList={this.getList} />
       </Wrapper>
